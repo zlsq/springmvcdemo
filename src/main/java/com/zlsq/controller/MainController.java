@@ -81,6 +81,8 @@ public class MainController {
         modelMap.addAttribute("user", userEntity);
         return "admin/userDetail";
     }
+
+
 }
 
 
