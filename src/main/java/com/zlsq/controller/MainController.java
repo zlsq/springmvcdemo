@@ -82,7 +82,34 @@ public class MainController {
         return "admin/userDetail";
     }
 
+    //更新用户信息 页面
+    @RequestMapping(value = "/admin/users/update/{id}",method = RequestMethod.GET)
+    public String updateUser(@PathVariable("id")Integer userId,ModelMap modelMap){
+        //找到userId所表示的用户
+        UserEntity userEntity = userRepository.findOne(userId);
+        //传递给请求页面
+        modelMap.addAttribute("user", userEntity);
+        return "admin/updateUser";
+    }
 
+    //更新用户信息操作
+    @RequestMapping(value = "/admin/users/updateP", method = RequestMethod.POST)
+    public String updateUserPost(@ModelAttribute("userP")UserEntity user) {
+        //更新用户信息
+        userRepository.updateUser(user.getNickname(), user.getFirstName(), user.getLastName(), user.getPassword(), user.getId());
+        userRepository.flush();//刷新缓冲区
+        return "redirect:/admin/users";
+    }
+
+    //删除用户
+    @RequestMapping(value = "/admin/users/delete/{id}",method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id") Integer userId, ModelMap modelMap) {
+        //删除id为userId的用户
+        userRepository.delete(userId);
+        //立即刷新
+        userRepository.flush();
+        return "redirect:admin/users";
+    }
 }
 
 
