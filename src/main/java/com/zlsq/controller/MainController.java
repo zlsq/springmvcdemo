@@ -103,12 +103,12 @@ public class MainController {
 
     //删除用户
     @RequestMapping(value = "/admin/users/delete/{id}",method = RequestMethod.GET)
-    public String deleteUser(@PathVariable("id") Integer userId, ModelMap modelMap) {
+    public String deleteUser(@PathVariable("id") Integer userId) {
         //删除id为userId的用户
         userRepository.delete(userId);
         //立即刷新
         userRepository.flush();
-        return "redirect:admin/users";
+        return "redirect:/admin/users";
     }
 }
 
