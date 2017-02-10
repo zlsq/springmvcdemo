@@ -1,7 +1,7 @@
 package com.zlsq.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by zlsq on 2017/2/5.
